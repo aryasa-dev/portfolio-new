@@ -3,8 +3,10 @@ import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
+import Process from "@/components/process";
 import Projects from "@/components/projects";
 import Tech from "@/components/tech";
+import Top from "@/components/top";
 import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
 import Head from "next/head";
@@ -31,12 +33,14 @@ const Home: React.FC<HomeProps> = ({ heroData, aboutData, techData, projectsData
 
       <main>
         <Header />
+        {/* <Top heroData={heroData} aboutData={aboutData} /> */}
         <Hero data={heroData} />
         <About data={aboutData} />
         <Tech data={techData} />
+        {/* <Process /> */}
         <Projects data={projectsData} />
-        <Contact data={contactData} />
-        <Footer />
+        {/* <Contact data={contactData} /> */}
+        <Footer data={contactData} />
       </main>
     </div>
   );
@@ -77,7 +81,9 @@ export async function getServerSideProps() {
   const contactQuery = groq`*[_type == "contact"]{
     _id,
     email,
-    phone
+    phone,
+    linkedin,
+    github
   }`
 
   const heroData = await client.fetch(welcomeQuery);

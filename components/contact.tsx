@@ -77,9 +77,9 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                 rows={10}
                 className="px-3 py-2 font-medium w-full bg-white rounded-md border border-neutral-200 shadow-sm focus:outline-none"
               />
-              <Button type="submit" classname="!mt-10">
+              {/* <Button type="submit" classname="!mt-10">
                 Send Message
-              </Button>
+              </Button> */}
             </form>
           </div>
         </div>

@@ -50,10 +50,21 @@ type Project = Main & {
   detail: any;
   images_detail: Image[];
   demo: string;
-  github: string;
+  github?: string;
 };
 
 type Contact = Main & {
   email: string;
   phone: string;
+  linkedin: string
+  github: string
 };
+
+type ContactLink = Main & {
+  github: string
+  linkedin: string
+};
+
+type FooterLink = Main & {
+  links: ContactLink[]
+}

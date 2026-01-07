@@ -1,61 +1,32 @@
 import React from "react";
-// import Section from "./section";
-// import Divider from "./divider";
 import SectionTitle from "./section-title";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
-import Button from "./button";
-import { motion } from "motion/react";
 import { ExternalLinkIcon } from "lucide-react";
 
-type ProjectsProps = {
+type Props = {
   data: Project[];
 };
 
-const cardVariants = {
-  hidden: { opacity: 0, x: 40 },
-  show: { opacity: 1, x: 0 },
-};
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const Projects: React.FC<ProjectsProps> = ({ data }) => {
+export function ProjectList({ data }: Props) {
   return (
-    <section id="projects" className="py-[120px]">
+    <section className="py-[140px]">
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-y-5 justify-between">
-          <div className="xl:max-w-[80%]">
-            <SectionTitle>Take a look at my projects</SectionTitle>
-          </div>
-          <Link href={"/project"} className="lg:ml-auto">
-            <Button>Browse All</Button>
-          </Link>
-        </div>
+        <SectionTitle>My Projects</SectionTitle>
+        <p className="lg:text-lg mt-2">
+          A curated collection of projects I’ve built 👇 from client work to
+          personal experiments.
+        </p>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col md:grid md:grid-cols-3 gap-5 mt-10"
-        >
+        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-5 mt-10">
           {data &&
-            data.slice(0, 6).map((project) => (
-              <motion.div
-                variants={cardVariants}
-                transition={{ duration: 0.7 }}
-                className="flex flex-col-reverse lg:flex-row justify-between gap-7 border border-neutral-300/60 rounded-md overflow-hidden relative"
+            data.map((project) => (
+              <div
+                className="flex justify-between gap-7 border border-neutral-300/60 rounded-md relative"
                 key={project._id}
               >
-                {/* <div className="w-full lg:w-1/2 flex flex-col justify-between p-4 lg:p-0">
+                {/* <div className="w-1/2 flex flex-col justify-between">
                   <div>
                     <b className="font-bold text-xl mb-1 block">
                       {project.cover_title}
@@ -81,9 +52,14 @@ const Projects: React.FC<ProjectsProps> = ({ data }) => {
                   />
                 </div>
                 <div className="absolute inset-0 rounded-md bg-neutral-300 bg-opacity-90 flex flex-col items-center place-content-center transition duration-300 opacity-0 hover:opacity-100 p-4 lg:p-0">
-                  <Link href={`/project/${project.slug.current}`} className="flex items-center gap-x-2 font-medium transition duration-300 hover:underline">Case Study <ExternalLinkIcon size={18} /></Link>
+                  <Link
+                    href={`/project/${project.slug.current}`}
+                    className="flex items-center gap-x-2 font-medium transition duration-300 hover:underline"
+                  >
+                    Case Study <ExternalLinkIcon size={18} />
+                  </Link>
                 </div>
-              </motion.div>
+              </div>
               // <Link
               //   href={`/project/${project.slug.current}`}
               //   key={project._id}
@@ -120,10 +96,8 @@ const Projects: React.FC<ProjectsProps> = ({ data }) => {
               //   </div>
               // </Link>
             ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
-};
-
-export default Projects;
+}

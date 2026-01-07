@@ -15,5 +15,15 @@ export default defineType({
       title: "Phone",
       type: "string",
     }),
+    defineField({
+      name: "linkedin",
+      title: "Linkedin",
+      type: "string",
+    }),
+    defineField({
+      name: "github",
+      title: "GitHub",
+      type: "string",
+    }),
   ],
 });

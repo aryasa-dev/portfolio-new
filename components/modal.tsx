@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import {
   FaGithub,
@@ -46,6 +46,25 @@ const contacts = [
 ];
 
 export function ContactModal({ isOpen, setIsOpen }: ContactModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, setIsOpen]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -80,7 +99,7 @@ export function ContactModal({ isOpen, setIsOpen }: ContactModalProps) {
               exit={{ opacity: 0, y: 40, scale: 0.95 }}
               transition={{ type: "spring", duration: 0.5 }}
             >
-              <div className="relative bg-white border border-gray-200 rounded-xl p-6 pt-10 w-full max-w-xl shadow-xl">
+              <div className="relative bg-white border border-gray-200 rounded-xl p-6 pt-10 w-full max-w-xl shadow-xl" ref={modalRef}>
                 <XIcon
                   className="absolute top-3 right-3 cursor-pointer transition-transform duration-300 hover:rotate-90"
                   onClick={() => setIsOpen(false)}

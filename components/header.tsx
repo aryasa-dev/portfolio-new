@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import Container from "./container";
+// import Container from "./container";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 
@@ -40,7 +40,9 @@ const Header = (props: Props) => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2,
+        rootMargin: "-30px 0px -50px 0px"
+       }
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -57,15 +59,15 @@ const Header = (props: Props) => {
   return (
     <header className="py-5 fixed z-20 w-full">
       <nav>
-        <div className="max-w-[250px] relative  flex items-center justify-center  mx-auto  group">
+        <div className="max-w-[180px] md:max-w-[250px] relative  flex items-center justify-center  mx-auto  group">
           <p className="w-full px-3 pt-1 pb-2 text-center bg-neutral-700 rounded-xl text-3xl tracking-wide font-bold block text-[#F3F4FA] transition-all duration-300 cursor-pointer group-hover:w-[150px]">
             arya.
           </p>
-          <div className="max-w-xl mx-auto absolute -z-[3] top-full -mt-3 flex items-center gap-x-1 bg-neutral-700 p-3 rounded-xl transition-all duration-300 opacity-0 -translate-y-2 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
+          <div className="max-w-xl mx-auto absolute -z-[3] top-full -mt-2 md:-mt-3 flex items-center gap-x-1 bg-neutral-700 p-2 md:p-3 rounded-xl transition-all duration-300 opacity-0 -translate-y-2 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
             {navMenu.map((menu, id) => (
               <Link
                 href={`/#${menu.link}`}
-                className={`w-max px-8 py-2 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-[#F3F4FA] hover:text-neutral-700 ${
+                className={`w-max px-5 md:px-8 py-2 flex items-center justify-center rounded-lg transition-all duration-300 hover:bg-[#F3F4FA] hover:text-neutral-700 text-sm md:text-base ${
                   activeSection === menu.link
                     ? "bg-[#F3F4FA] text-neutral-700"
                     : "bg-transparent text-[#F3F4FA]"

@@ -45,7 +45,7 @@ const Projects: React.FC<ProjectsProps> = ({ data }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col md:grid md:grid-cols-3 gap-5 mt-10"
+          className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10"
         >
           {data &&
             data.slice(0, 6).map((project) => (
